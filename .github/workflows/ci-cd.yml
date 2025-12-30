@@ -3,7 +3,7 @@ name: Build and push docker image
 # Trigger: whenever something push on Master branch
 on:
   push:
-    branches: ["Master"]
+    branches: ["master"]
 
 jobs:
   build-and-push:
