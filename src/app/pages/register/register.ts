@@ -114,7 +114,7 @@ export class Register {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {confirmPassword, ...rest} = this.registerForm().value();
 
-        const registerRequest = {id, ...rest};
+    //    const registerRequest = {id, ...rest};
 
         this.store.dispatch(authActions.register(registerRequest));
     }
