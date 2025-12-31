@@ -14,18 +14,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      #2. Docker buildx setup
+      #2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: '20'
+          cache: 'npm'
+
+      #3. Install Dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      #4. Quality Guard (Linting)
+      - name: Run Linting
+        run: npm run lint
+
+      #6. Docker buildx setup
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      #3. Login to docker hub
+      #7. Login to docker hub
       - name: Login to Docker hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      #4. Build Image and Push
+      #8. Build Image and Push
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
