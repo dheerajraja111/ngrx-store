@@ -4,6 +4,9 @@ name: Build and push docker image
 on:
   push:
     branches: ["master"]
+  pull_request: 
+    branches: ["master"]
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-and-push:
