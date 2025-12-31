@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { productFeature } from './pages/products/store/product-feature';
-import { createEffect, provideEffects } from '@ngrx/effects';
+import { provideEffects } from '@ngrx/effects';
 import * as productEffect from './pages/products/store/product-effect';
 import { profileFeature } from './pages/profile/store/profile-feature';
 import * as profileEffect from './pages/profile/store/profile-effect';

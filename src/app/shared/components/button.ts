@@ -25,6 +25,7 @@ const iconSizeClasses: Record<ButtonSize, string> = {
 };
 
 @Component({
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'button[appButton], a[appButton]',
     template: `<ng-content />`,
     host: {

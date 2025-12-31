@@ -111,6 +111,7 @@ export class Register {
         event.preventDefault();
         const id = Date.now();
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const {confirmPassword, ...rest} = this.registerForm().value();
 
         const registerRequest = {id, ...rest};
