@@ -51,3 +51,26 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/ngrx-store:latest
+
+  # Deploy to AWS
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with: 
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          scripts: |
+            #1. Pull Latest image
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/ngrx-store:latest
+
+            #2. Stop and remove old container
+            sudo docker stop angular-app || true
+            sudo docker rm angular-app || true
+
+            #3. Run New container and name it angular-app
+            sudo docker run -d -p 80:80 --name angular-app ${{ secrets.DOCKER_USERNAME }}/ngrx-store:latest
